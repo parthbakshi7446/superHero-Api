@@ -1,9 +1,9 @@
+/* general */
 body{
     padding: 0px;
     margin: 0px;
     font-family: "Segoe UI",Arial,sans-serif;
     background-color: wheat;
-    /* background-color: aqua; */
 }
 .whitec{
     color: white;
@@ -15,6 +15,7 @@ body{
     display: flex;
 }
 
+/* header for different anchor tag */
 header{
     width:99.3%;
     height:7vh;
@@ -28,20 +29,23 @@ header a{
     text-decoration: none;
 }
 
+/* data representation for the hero */
 main{
     width:80%;
-    /* border: 1px solid black; */
     height:80vh;
     padding:5px;
     margin-top: 10px;
     display: flex;
     margin: auto;
 }
+
 main>div{
     width:50%;
     height:100%;
     /* border: 1px solid black; */
 }
+
+/* box for hero name */
 #hero-name{
     height:15%;
     font-size:60px;
@@ -49,6 +53,7 @@ main>div{
     font-family: cursive;
     color:black;
 }
+/* box for hero image */
 #hero-img{
     height:85%;
     width:100%; 
@@ -61,6 +66,8 @@ main>div{
     height:95%;
     width:95%;
 }
+
+/* box for hero detail */
 #hero-detail{
     background-color: whitesmoke;
     display:flex;
@@ -75,6 +82,7 @@ main>div{
     padding:3px;
     margin: 2px;
 }
+/* common class for making all letters bold */
 .ques{
     background-color: yellow;
     height: 100%;

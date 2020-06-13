@@ -3,15 +3,17 @@ let display = document.getElementById("display");
 let template = document.getElementsByTagName('template')[0];
 
 let data = JSON.parse(myStorage.getItem('favourite'));
-console.log(data)
 
+//adding all elements to this element div and in end, updating it to DOM
 let outer = document.createElement('div');
+
+//iterating over saved data of ids of favourite heroes
 for(let id of data){
     getElemAndAdd(id);
 }
 display.appendChild(outer);
 
-
+//make a call for specific id and updates its info
 function getElemAndAdd(id){
     $.ajax({
         type:'get',
@@ -29,6 +31,8 @@ function getElemAndAdd(id){
         outer.appendChild(element);
     }
 }
+
+//deletes an element of a hero after its clicked
 function heroDelete(event){
     let id = event.target.getAttribute('heroid');
     event.target.closest('div').remove();
@@ -47,6 +51,7 @@ function heroDelete(event){
     event.stopPropagation();
 }
 
+//redirecting page to show info of a hero
 document.getElementById("display").addEventListener('click',function(event){
     let id = event.target.closest('div').getAttribute('heroid');
     if(id){

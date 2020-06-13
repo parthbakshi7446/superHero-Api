@@ -1,8 +1,13 @@
 let input = document.getElementById("hero-input");
 let display = document.getElementById("display");
+
+//on every char input, heroes are updated
 input.addEventListener('keyup',searchHero);
+
+//accessing local storage
 let myStorage = window.localStorage;
 
+//creating storage
 if(myStorage.getItem('favourite')){
     console.log("Storage Already There");
 }else{
@@ -12,7 +17,7 @@ if(myStorage.getItem('favourite')){
 }
 
 
-
+//function which makes an ajax call and search for hero
 function searchHero(){
     console.log(input.value);
     if(input.value==""){
@@ -21,20 +26,27 @@ function searchHero(){
     $.ajax({
         type:'get',
         url:`https://superheroapi.com/api.php/929970120805510/search/${input.value}`,
-        success: searchSuccess,
+        success: updateDOM,
         error:function(err){console.log(err.responseText);}
     })
 }
-function searchSuccess(data){
+
+//display all heroes in DOM after fetched 
+function updateDOM(data){
+
+    //returning if multiple requests are made and returning only final one
     if(input.value!=data["results-for"]){
         return;
     }
-    console.log(data);
+
     display.innerHTML="";
     let template = document.getElementsByTagName("template")[0];
     if(!data.results){
-        return;
+        return;//if nothing is returned from ajax call
     }
+
+    //adding all elemnets to outer div
+    //to avoid performance issue due to multiple operations on DOM
     let outer = document.createElement('div');
     for(let post of data.results){
         let element = template.content.cloneNode(true);
@@ -42,19 +54,19 @@ function searchSuccess(data){
         element.children[0].children[1].innerHTML=`<img src="${post.image.url}" alt="${post.name}">`;
         element.children[0].children[2].setAttribute('heroId',`${post.id}`);
         element.children[0].setAttribute('heroid',`${post.id}`);
-        element.children[0].addEventListener('click',heroClick);
         outer.appendChild(element);
     }
     display.appendChild(outer);
 }
 
-function addFav(id){
-    console.log(id);
+
+//if found , update that hero to local storage 
+function addFavHero(id){
     let arr = myStorage.getItem('favourite');
     arr = JSON.parse(arr);
     
     if(!arr.includes(id)){
-        alert("added to favuorites");
+        alert("added to favourites");
         arr.push(id);
     }
     else{
@@ -63,18 +75,16 @@ function addFav(id){
     myStorage.setItem('favourite',JSON.stringify(arr));
 }
 
-function heroClick(event){
+//event listener forr all the heroes to show their info & adding them to fav using event delgation
+document.getElementById("display").addEventListener('click',function(event){
+    //adding them to favourite
     let head = event.target.closest('div');
     if(event.target==head.children[2]){
-        addFav(head.children[2].getAttribute("heroid"));
-
+        addFavHero(head.children[2].getAttribute("heroid"));
         event.stopPropagation();
         return;
     }
-
-}
-
-document.getElementById("display").addEventListener('click',function(event){
+    //redirecting them to show their info
     let id = event.target.closest('div').getAttribute('heroid');
     if(id){
         window.location.href = `hero.html?id=${id}`;
