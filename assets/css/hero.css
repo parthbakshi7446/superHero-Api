@@ -1,0 +1,81 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    background-color: wheat;
+    /* background-color: aqua; */
+}
+.whitec{
+    color: white;
+}
+.white{
+    background-color: white;
+}
+.flex{
+    display: flex;
+}
+
+header{
+    width:99.3%;
+    height:7vh;
+    display: flex;
+    padding: 5px;
+    justify-content: space-evenly;
+    background-color: rgb(10,10,30);
+    font-size: 1.5rem;
+}
+header a{
+    text-decoration: none;
+}
+
+main{
+    width:80%;
+    /* border: 1px solid black; */
+    height:80vh;
+    padding:5px;
+    margin-top: 10px;
+    display: flex;
+    margin: auto;
+}
+main>div{
+    width:50%;
+    height:100%;
+    /* border: 1px solid black; */
+}
+#hero-name{
+    height:15%;
+    font-size:60px;
+    text-align: center;
+    font-family: cursive;
+    color:black;
+}
+#hero-img{
+    height:85%;
+    width:100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+}
+#hero-img img{
+    height:95%;
+    width:95%;
+}
+#hero-detail{
+    background-color: whitesmoke;
+    display:flex;
+    flex-wrap: wrap;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+}
+#hero-detail span{
+    border:1px solid black;
+    border-radius: 7px;
+    padding:3px;
+    margin: 2px;
+}
+.ques{
+    background-color: yellow;
+    height: 100%;
+}
