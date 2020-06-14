@@ -48,7 +48,7 @@ main>div{
 /* box for hero name */
 #hero-name{
     height:15%;
-    font-size:60px;
+    font-size: 300%;
     text-align: center;
     font-family: cursive;
     color:black;

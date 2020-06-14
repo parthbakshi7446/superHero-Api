@@ -5,17 +5,18 @@ window.addEventListener('load',function(req){
     const urlParams = new URLSearchParams(window.location.search);
     let id = urlParams.get('id');
 
-
-    $.ajax({
-        type:'get',
-        url:`https://superheroapi.com/api.php/929970120805510/${id}`,
-        success:searchAndUpdate,
-        error:function(err){console.log(err.responseText);}
-    });
+    let xhr = new XMLHttpRequest();
+    xhr.open('get',`https://superheroapi.com/api.php/929970120805510/${id}`);
+    xhr.send();
+    xhr.onload = searchAndUpdate;
+    xhr.onerror = function(err){console.log(err.responseText);};
 });
 
 //searching for the particular hero and updating its info to the DOM
 function searchAndUpdate(data){
+
+    //converting response to JSON format
+    data = JSON.parse(data.target.response);
 
     let heroName = document.getElementById("hero-name");
     let heroImg = document.getElementById("hero-img");

@@ -19,21 +19,22 @@ if(myStorage.getItem('favourite')){
 
 //function which makes an ajax call and search for hero
 function searchHero(){
-    console.log(input.value);
     if(input.value==""){
         return;
     }
-    $.ajax({
-        type:'get',
-        url:`https://superheroapi.com/api.php/929970120805510/search/${input.value}`,
-        success: updateDOM,
-        error:function(err){console.log(err.responseText);}
-    })
+    let xhr = new XMLHttpRequest();
+    xhr.open('get',`https://superheroapi.com/api.php/929970120805510/search/${input.value}`);
+    xhr.send();
+    xhr.onload = updateDOM;
+    xhr.onerror = function(err){console.log(err.responseText);};
 }
 
 //display all heroes in DOM after fetched 
 function updateDOM(data){
 
+    //converting response to JSON format
+    data = JSON.parse(data.target.response);
+    
     //returning if multiple requests are made and returning only final one
     if(input.value!=data["results-for"]){
         return;

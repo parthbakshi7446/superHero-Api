@@ -15,13 +15,17 @@ display.appendChild(outer);
 
 //make a call for specific id and updates its info
 function getElemAndAdd(id){
-    $.ajax({
-        type:'get',
-        url:`https://superheroapi.com/api.php/929970120805510/${id}`,
-        success: Add,
-        error:function(err){console.log(err.plainText);}
-    });
+    let xhr = new XMLHttpRequest();
+    xhr.open('get',`https://superheroapi.com/api.php/929970120805510/${id}`);
+    xhr.send();
+    xhr.onload = Add;
+    xhr.onerror = function(err){console.log(err.responseText);};
+    
     function Add(post){
+
+        //converting response to JSON format
+        post = JSON.parse(post.target.response);
+
         let element = template.content.cloneNode(true);
         element.children[0].children[0].innerHTML=`${post.name}`;
         element.children[0].children[1].innerHTML=`<img src="${post.image.url}" alt="${post.name}">`;
